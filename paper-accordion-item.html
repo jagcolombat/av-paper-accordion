@@ -1,0 +1,192 @@
+<!--
+@author Arshak Khachatrian (<a href="mailto:akhxtern@gmail.com">akhxtern@gmail.com</a>)
+@website http://spacee.xyz
+@updateDate Mar 26, 2017
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+
+<dom-module id="paper-accordion-item">
+    <template>
+        <style>
+
+            :host {
+                --paper-accordion-item-header-background: transparent;
+                --paper-accordion-item-header-border-color: rgba(0, 0, 0, 0.25);
+                --paper-accordion-item-header-color: black;
+                --paper-accordion-item-header-icon-color: black;
+                --paper-accordion-item-content-background: rgba(0,0,0,0.1);
+                --paper-accordion-item-content-color: black;
+                --paper-accordion-item-content-border-color: rgba(0, 0, 0, 0.25);
+                @apply(--paper-accordion-item);
+            }
+
+            :host .accordion-item {
+                display: flex;
+                flex-direction: column;
+            }
+
+            :host .accordion-header {
+                display: flex;
+                padding: 10px;
+                overflow: hidden;
+                position: relative;
+                border: 0.5px solid var(--paper-accordion-item-header-border-color);
+                border-bottom: none;
+                cursor: pointer;
+                background-color: var(--paper-accordion-item-header-background);
+                color: var(--paper-accordion-item-header-color);
+            }
+
+            /*:host([last-element]) .accordion-header{
+                border-bottom: 0.5px solid var(--paper-accordion-item-header-border-color);
+            }*/
+            :host:last-of-type .accordion-header{
+                border-bottom: 0.5px solid var(--paper-accordion-item-header-border-color);
+            }
+
+            :host .accordion-header p {
+                margin: 0;
+                padding: 0;
+            }
+
+            :host .accordion-header > div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            :host .accordion-item-title {
+                opacity: 0.9;
+                font-size: 14px;
+                line-height: 2.1;
+                font-weight: 100;
+            }
+
+            :host .accordion-item-subtitle {
+                opacity: 0.6;
+                font-size: 12px;
+                font-weight: 100;
+                line-height: 1.7;
+            }
+
+            :host .accordion-header iron-icon {
+                width: 19px;
+                margin: 0 10px;
+                transition: 300ms all;
+                color: var(--paper-accordion-item-header-icon-color);
+            }
+
+            :host .accordion-header > div:nth-child(2) {
+                flex: 1;
+                padding-left: 10px;
+            }
+
+            :host .accordion-content {
+                background-color: var(--paper-accordion-item-content-background);
+                color: var(--paper-accordion-item-content-color);
+                /*Adicionando estilos a los bordes laterales y justificacion */
+                border-left: 0.5px solid var(--paper-accordion-item-content-border-color);
+                border-right: 0.5px solid var(--paper-accordion-item-content-border-color);
+                text-align: justify;
+                /*------------------------------------------*/
+                max-height: 0;
+                overflow: hidden;
+                transition: all 600ms ease-in-out;
+            }
+
+            :host([opened]) .accordion-content {
+                max-height: 500px;
+                /*Adicionando estilos al borde superior*/
+                border-top: 0.5px solid var(--paper-accordion-item-content-border-color);
+            }
+
+            /*Adicionando estilos al borde inferior*/
+            :host([opened]):last-of-type .accordion-content {
+                border-top: 0px;
+                border-bottom: 0.5px solid var(--paper-accordion-item-content-border-color);
+            }
+
+            :host([opened]) .accordion-header iron-icon {
+                transform: rotate(90deg);
+            }
+
+            :host([icon-position="right"]) .accordion-header > div:nth-child(2) {
+                order: 1;
+            }
+            :host([icon-position="right"]) .accordion-header > div:nth-child(1) {
+                order: 2;
+            }
+
+            :host .accordion-content-padding {
+                padding: 10px 20px;
+            }
+        </style>
+
+        <div class="accordion-item">
+            <div class="accordion-header" on-tap="toggle">
+                <div>
+                    <iron-icon icon="{{ icon }}"></iron-icon>
+                </div>
+                <div>
+                    <p class="accordion-item-title">{{ title }}</p>
+                    <p class="accordion-item-subtitle">{{ subTitle }}</p>
+                    <paper-ripple></paper-ripple>
+                </div>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-padding">
+                    <content></content>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'paper-accordion-item',
+            properties: {
+                icon: {
+                    type: String,
+                    value: 'icons:chevron-right'
+                },
+                iconPosition: {
+                    type: String,
+                    value: 'left' // or right
+                },
+                title: {
+                    type: String,
+                    value: ''
+                },
+                subTitle: {
+                    type: String,
+                    value: ''
+                }
+            },
+            attached: function(){
+                let that = this;
+
+                if(that.iconPosition) {
+                    that.setAttribute('icon-position', that.iconPosition);
+                }
+            },
+            toggle: function(){
+                let that = this;
+                if(that.hasAttribute('opened')) {
+                    that.close();
+                } else {
+                    that.open();
+                }
+            },
+            open: function(){
+                this.setAttribute('opened', true);
+                this.fire('paper-accordion-open');
+            },
+            close: function(){
+                this.removeAttribute('opened');
+                this.fire('paper-accordion-close');
+            }
+        })
+    </script>
+</dom-module>

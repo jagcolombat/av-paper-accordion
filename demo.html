@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>&#x3C;paper-accordion&#x3E; demo page</title>
+	<script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../font-roboto/roboto.html">
+	<link rel="import" href="../paper-styles/typography.html">
+	<link rel="import" href="../paper-material/paper-material.html">
+	<link rel="import" href="paper-accordion.html">
+</head>
+<body>
+	<style is="custom-style">
+
+        body {
+            font-family: Roboto;
+        }
+
+	    .paper-font-display1 {
+	        font-weight: 300 !important;
+	        color: teal;
+	        margin: 20px;
+	        @apply(--paper-font-display1);
+	    }
+
+	    .paper-font-headline {
+	        @apply(--paper-font-headline);
+	    }
+
+	    .paper-font-title {
+	        @apply(--paper-font-title);
+	    }
+
+	    .paper-font-subhead {
+	        @apply(--paper-font-subhead);
+	    }
+
+	    .paper-font-button {
+	        @apply(--paper-font-button);
+	        color: teal;
+	    }
+
+	    paper-material {
+	    	min-height: 300px;
+	    	position: relative;
+	    	padding: 10px;
+	    	margin: 10px 0;
+	    }
+
+	    .code-area pre {
+	    	margin: 30px -230px;
+	    }
+
+		pre {
+			width: 100%;
+		}
+
+	</style>
+
+	<div class="paper-font-display1">&#x3C;paper-accordion&#x3E;</div>
+
+	<paper-material elevation="2">
+		<div class="paper-font-button">Close others, Icons right, with SubTitles</div>
+
+		<paper-accordion close-others="true">
+            <paper-accordion-item title="Armenian" icon-position="right" sub-title="Republic of Armenia">
+                No ... not the Kim Kardashians.
+            </paper-accordion-item>
+            <paper-accordion-item title="American" icon-position="right" sub-title="USA">
+                Yeah ... the Kardashians.
+            </paper-accordion-item>
+            <paper-accordion-item title="British" icon-position="right" sub-title="UK">
+                Do you know Mr. Bean?
+            </paper-accordion-item>
+            <paper-accordion-item title="German" icon-position="right" sub-title="Deutschland">
+                And no ... not the Hitler.
+            </paper-accordion-item>
+	  	</paper-accordion>
+	</paper-material>
+
+	<paper-material elevation="2">
+		<div class="paper-font-button">Icons left, with SubTitles</div>
+		<paper-accordion>
+            <paper-accordion-item title="Addy Osmani" icon="add" icon-position="left" sub-title="@polymer">
+                The first.
+            </paper-accordion-item>
+            <paper-accordion-item title="Rob Dodson" icon="add" icon-position="left" sub-title="@polymer">
+                The second.
+            </paper-accordion-item>
+            <paper-accordion-item title="Paul Irish" icon="add" icon-position="left" sub-title="@chrome">
+                The third.
+            </paper-accordion-item>
+            <paper-accordion-item title="Rouben Meschian" icon="add" icon-position="left" sub-title="@cambridesemantics">
+                The fourth.
+            </paper-accordion-item>
+	  	</paper-accordion>
+	</paper-material>
+
+	<paper-material elevation="2">
+		<div class="paper-font-button">Icons right, without SubTitles</div>
+		<paper-accordion>
+            <paper-accordion-item title="Addy Osmani" icon="add" icon-position="right">
+                @polymer
+            </paper-accordion-item>
+            <paper-accordion-item title="Rob Dodson" icon="add" icon-position="right">
+                @polymer
+            </paper-accordion-item>
+            <paper-accordion-item title="Paul Irish" icon="add" icon-position="right">
+                @chrome
+            </paper-accordion-item>
+            <paper-accordion-item title="Rouben Meschian" icon="add" icon-position="right">
+                @cambridgesemantics
+            </paper-accordion-item>
+	  	</paper-accordion>
+	</paper-material>
+</body>
+</html>
